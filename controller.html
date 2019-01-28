@@ -1,0 +1,50 @@
+<html ng-app="recipesApp">
+
+<head>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/controller.css">
+    <script type="text/javascript" src="angular.min.js"></script>
+
+</head>
+
+<body ng-controller="RecipeListController">
+    <p>Filter List: <input ng-model="searchFor" size="30" /> </p>
+    <div ng-repeat="recipe in filtered = ( recipes | filter:searchFor | orderBy: 'type')" class="recipe card card-group">
+        <div class="card-heading"> {{recipe.name}} ({{recipe.type}})</div>
+        <div class="card-body">
+            {{ recipe.summary}}
+        </div>
+        
+    </div>
+    <div style="clear: left"></div>
+ 
+    <p>there are {{ filtered.length}} recipes so far!</p>
+
+    <script type="text/javascript">
+        var recipesApp = angular.module('recipesApp', []);
+        recipesApp.controller("RecipeListController", ['$scope', function ($scope) {
+            $scope.recipes = [
+                {
+                    name: 'pasta al peso',
+                    type: 'italian',
+                    summary: 'A quick and simple dish for any italian hosuehold'
+                },
+                {
+                    name: 'Garlic Broccolini', type: 'chinese',
+                    summary: 'A healthy and full of glavour'
+                },
+                {
+                    name: 'shorbat addas', type: 'arab',
+                    summary: 'bunk but the arabs like'
+                },
+                {
+                    name: 'berice and basto', type: 'somalian',
+                    summary: 'pretty dank can be served with banana'
+                },
+            ];
+        }]);
+    </script>
+
+</body>
+
+</html>
